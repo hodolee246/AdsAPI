@@ -13,7 +13,7 @@ public class AdsExceptionAdvice {
 
     @ExceptionHandler(AdsException.class)
     public ResponseEntity<?> adsException(AdsException e) {
-        log.error("AdsExceptionAdvice adsException / {}, {}", e.getMessage(), e.getCode());
+        log.error("adsExceptionMessage : {}, adsExceptionCode : {}", e.getMessage(), e.getCode());
         CommonResult errorResult = new CommonResult(e.getMessage(), e.getCode());
 
         return ResponseEntity.ok().body(errorResult);
@@ -21,7 +21,7 @@ public class AdsExceptionAdvice {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> ServerException(Exception e) {
-        log.error("AdsExceptionAdvice Exception / {}", e.getMessage());
+        log.error("exceptionMessage : {}", e.getMessage());
         CommonResult errorResult = new CommonResult(e.getMessage(), AdsUtil.getServerErrorCode());
 
         return ResponseEntity.ok().body(errorResult);

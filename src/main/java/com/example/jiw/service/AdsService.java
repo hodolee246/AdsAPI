@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-@Slf4j
 @Service
 public class AdsService {
 
@@ -54,7 +53,6 @@ public class AdsService {
     public CommonResult createAds(Ads ads) throws AdsException {
         try {
             Ads isAds = adsRepository.findByAggregateDateAndAggregateTime(ads.getAggregateDate(), ads.getAggregateTime()).orElse(null);
-
             if (isAds != null && isAds.getAggregateDate().isEqual(ads.getAggregateDate()) && isAds.getAggregateTime() == ads.getAggregateTime()) {
                 ads.updateAds(isAds);
             }

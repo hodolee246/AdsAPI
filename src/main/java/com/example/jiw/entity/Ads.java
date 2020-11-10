@@ -1,13 +1,13 @@
 package com.example.jiw.entity;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-@ToString
 @Entity
 @Getter
+@Setter
+@ToString
 public class Ads {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

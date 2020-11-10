@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo swaggerInfo() {
         return new ApiInfoBuilder().title("Spring API Documentation")
-                .description("API 문서")
+                .description("FSN CodingTest API 문서")
                 .license("JeonInWoo").licenseUrl("http://hodolee246.tistory.com/").version("1").build();
     }
 }

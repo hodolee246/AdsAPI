@@ -16,14 +16,14 @@ public class AdsExceptionAdvice {
         log.error("adsExceptionMessage : {}, adsExceptionCode : {}", e.getMessage(), e.getCode());
         CommonResult errorResult = new CommonResult(e.getMessage(), e.getCode());
 
-        return ResponseEntity.ok().body(errorResult);
+        return ResponseEntity.status(e.getCode()).body(errorResult);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> ServerException(Exception e) {
         log.error("exceptionMessage : {}", e.getMessage());
-        CommonResult errorResult = new CommonResult(e.getMessage(), AdsUtil.getServerErrorCode());
+        CommonResult errorResult = new CommonResult(AdsUtil.getServerErrorMessage(), AdsUtil.getServerErrorCode());
 
-        return ResponseEntity.ok().body(errorResult);
+        return ResponseEntity.status(500).body(errorResult);
     }
 }

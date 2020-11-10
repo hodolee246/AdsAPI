@@ -36,7 +36,7 @@ public class AdsController {
         log.info("aggregateDate : {}, aggregateTime : {}", aggregateDate, aggregateTime);
         AdsInfoResult adsInfoResult = adsService.getAds(aggregateDate, aggregateTime);
 
-        return ResponseEntity.ok().body(adsInfoResult);
+        return ResponseEntity.status(200).body(adsInfoResult);
     }
 
     @ApiOperation(value = "광고 종합 정보 생성", notes = "입력한 시간에 정보가 존재하지 않으면 새로운 광고정보를 생성하며 광고정보가 존재한다면 값을 갱신합니다. ")
@@ -49,6 +49,6 @@ public class AdsController {
         log.info("ads : {}", ads.toString());
         CommonResult commonResult = adsService.createAds(ads);
 
-        return ResponseEntity.ok().body(commonResult);
+        return ResponseEntity.status(201).body(commonResult);
     }
 }

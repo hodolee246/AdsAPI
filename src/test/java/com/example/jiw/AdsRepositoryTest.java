@@ -57,7 +57,8 @@ public class AdsRepositoryTest {
             log.info("totalAdsRequestCount : {}, totalAdsResponseCount : {}, totalAdsClickCount : {}", totalAdsRequestCount, totalAdsResponseCount, totalAdsClickCount);
         } else {
             Ads ads = getAds(date, time);
-            log.info("ads : {}", ads.toString());
+            Assertions.assertEquals(ads.getAggregateDate(), date);
+            Assertions.assertEquals(ads.getAggregateTime(), time);
         }
     }
 

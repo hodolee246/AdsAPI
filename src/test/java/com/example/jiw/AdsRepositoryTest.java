@@ -1,9 +1,11 @@
 package com.example.jiw;
 
+
+
 import com.example.jiw.entity.Ads;
 import com.example.jiw.repository.AdsRepository;
-import com.example.jiw.response.AdsInfoResult;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +37,11 @@ public class AdsRepositoryTest {
         ads.setAdsClickCount(6);
         adsRepository.save(ads);
         Ads isAds = adsRepository.findByAggregateDateAndAggregateTime(nowDate, nowTime).orElseGet(Ads::new);
-        log.info("ads / {}", ads.toString());
+        Assertions.assertEquals(ads.getAggregateDate(), isAds.getAggregateDate());
+        Assertions.assertEquals(ads.getAggregateTime(), isAds.getAggregateTime());
+        Assertions.assertEquals(ads.getAdsRequestCount(), isAds.getAdsRequestCount());
+        Assertions.assertEquals(ads.getAdsResponseCount(), isAds.getAdsResponseCount());
+        Assertions.assertEquals(ads.getAdsClickCount(), isAds.getAdsClickCount());
     }
 
     @Test
@@ -66,6 +72,11 @@ public class AdsRepositoryTest {
         ads.setAdsClickCount(7);
         Ads isAds = getAdsOrNull(ads.getAggregateDate(), ads.getAggregateTime());
         if(isAds != null && ads.getAggregateDate().isEqual(isAds.getAggregateDate()) && ads.getAggregateTime() == isAds.getAggregateTime()) {
+            Assertions.assertEquals(ads.getAggregateDate(), isAds.getAggregateDate());
+            Assertions.assertEquals(ads.getAggregateTime(), isAds.getAggregateTime());
+            Assertions.assertEquals(ads.getAdsRequestCount(), isAds.getAdsRequestCount());
+            Assertions.assertEquals(ads.getAdsResponseCount(), isAds.getAdsResponseCount());
+            Assertions.assertEquals(ads.getAdsClickCount(), isAds.getAdsClickCount());
             ads.updateAds(isAds);
         }
         adsRepository.save(ads);
@@ -82,26 +93,5 @@ public class AdsRepositoryTest {
     public Ads getAdsOrNull(LocalDate date, int time) {
         return adsRepository.findByAggregateDateAndAggregateTime(date, time).orElse(null);
     }
-
-/*    @Test
-    public void createAds2(Ads ads) {
-        Ads isAds = adsRepository.findByAggregateDateAndAggregateTime(ads.getAggregateDate(), ads.getAggregateTime()).orElse(null);
-        if(isAds != null && ads.getAggregateDate().isEqual(isAds.getAggregateDate()) && ads.getAggregateTime() == isAds.getAggregateTime()) {
-            ads.updateAds(isAds);
-        }
-        adsRepository.save(ads);
-    }
-
-    @Test
-    public void getAds2(Ads ads) {
-        if(ads.getAggregateTime() == NONE_TIME_DATA) {
-            List<Ads> isAds = adsRepository.findByAggregateDate(ads.getAggregateDate());
-            int totalAdsRequestCount = isAds.stream().mapToInt(Ads::getAdsRequestCount).sum();
-            int totalAdsResponseCount = isAds.stream().mapToInt(Ads::getAdsResponseCount).sum();
-            int totalAdsClickCount = isAds.stream().mapToInt(Ads::getAdsClickCount).sum();
-        } else {
-            Ads isAds = adsRepository.findByAggregateDateAndAggregateTime(ads.getAggregateDate(), ads.getAggregateTime()).orElse(null);
-        }
-    }*/
 }
 

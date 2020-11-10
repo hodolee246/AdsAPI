@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AdsService {
 
-    private final int NONE_TIME_DATA = 0;
+    private final int NONE_DATA = 0;
     private final AdsRepository adsRepository;
 
     public AdsService(AdsRepository adsRepository) {
@@ -27,9 +27,9 @@ public class AdsService {
             AdsInfoResult adsInfoResult = new AdsInfoResult();
             adsInfoResult.setMessage(AdsUtil.getSuccessMessage());
             adsInfoResult.setCode(AdsUtil.getSuccessCode());
-            if(aggregateTime == NONE_TIME_DATA) {
+            if(aggregateTime == NONE_DATA) {
                 List<Ads> adsList = adsRepository.findByAggregateDate(aggregateDate);
-                if (adsList.size() == 0) throw new NullPointerException();
+                if (adsList.size() == NONE_DATA) throw new NullPointerException();
                 // 광고 리스트(요청, 응답, 클릭) 값 더하기
                 adsInfoResult.setAdsRequestCount(adsList.stream().mapToInt(Ads::getAdsRequestCount).sum());
                 adsInfoResult.setAdsResponseCount(adsList.stream().mapToInt(Ads::getAdsResponseCount).sum());

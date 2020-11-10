@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface AdsRepository extends JpaRepository<Ads, Long> {
     List<Ads> findByAggregateDate(LocalDate aggregateDate);
     Optional<Ads> findByAggregateDateAndAggregateTime(LocalDate aggregateDate, int aggregateTime);
-    Ads findByIdx(Long idx);
 }

@@ -3,7 +3,7 @@ package com.example.jiw.util;
 
 public class AdsUtil {
     // 500 err
-    private final static String SERVER_ERROR_MESSAGE = "문제가 발생하여 요청을 처리하지 못하였습니다.";
+    private final static String SERVER_ERROR_MESSAGE = "서버에 문제가 발생하여 요청을 처리하지 못하였습니다.";
     private final static int SERVER_ERROR_CODE = 500;
     // 404 err
     private final static String NOT_FOUND_MESSAGE = "요청하신 정보는 없는 정보입니다.";

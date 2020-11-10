@@ -6,7 +6,6 @@ import com.example.jiw.entity.Ads;
 import com.example.jiw.repository.AdsRepository;
 import com.example.jiw.response.CommonResult;
 import com.example.jiw.util.AdsUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

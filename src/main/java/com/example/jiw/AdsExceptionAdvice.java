@@ -17,15 +17,15 @@ public class AdsExceptionAdvice {
         log.error("adsExceptionMessage : {}, adsExceptionCode : {}", e.getMessage(), e.getCode());
         CommonResult errorResult = new CommonResult(e.getMessage(), e.getCode());
         if(e.getCode() == AdsUtil.getNotFoundCode()) {
-            return new ResponseEntity<>(errorResult, HttpStatus.NOT_FOUND);
+            return new ResponseEntity(errorResult, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(errorResult, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(errorResult, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity ServerException(Exception e) {
         log.error("exceptionMessage : {}", e.getMessage());
         CommonResult errorResult = new CommonResult(AdsUtil.getServerErrorMessage(), AdsUtil.getServerErrorCode());
-        return new ResponseEntity<>(errorResult, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(errorResult, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

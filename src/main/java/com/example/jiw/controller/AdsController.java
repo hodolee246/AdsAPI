@@ -36,7 +36,7 @@ public class AdsController {
                     @ApiParam(value = "집계시간", required = false, example = "1")@RequestParam(name = "aggregateTime", defaultValue = "0") int aggregateTime) throws AdsException {
         log.info("aggregateDate : {}, aggregateTime : {}", aggregateDate, aggregateTime);
         AdsInfoResult adsInfoResult = adsService.getAds(aggregateDate, aggregateTime);
-        return new ResponseEntity<>(adsInfoResult, HttpStatus.OK);
+        return new ResponseEntity(adsInfoResult, HttpStatus.OK);
     }
 
     @ApiOperation(value = "광고 종합 정보 생성", notes = "입력한 시간에 정보가 존재하지 않으면 새로운 광고정보를 생성하며 광고정보가 존재한다면 값을 갱신합니다. ")
@@ -48,6 +48,6 @@ public class AdsController {
     public ResponseEntity createAds(@RequestBody Ads ads) throws AdsException {
         log.info("ads : {}", ads.toString());
         CommonResult commonResult = adsService.createAds(ads);
-        return new ResponseEntity<>(commonResult, HttpStatus.CREATED);
+        return new ResponseEntity(commonResult, HttpStatus.CREATED);
     }
 }

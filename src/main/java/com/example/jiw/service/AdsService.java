@@ -40,7 +40,6 @@ public class AdsService {
                 adsInfoResult.setAdsResponseCount(ads.getAdsResponseCount());
                 adsInfoResult.setAdsClickCount(ads.getAdsClickCount());
             }
-
             return adsInfoResult;
         } catch (NullPointerException e) {
             throw new AdsException(AdsUtil.getNotFoundMessage(), AdsUtil.getNotFoundCode());
@@ -57,7 +56,6 @@ public class AdsService {
             }
             adsRepository.save(ads);
             CommonResult commonResult = new CommonResult(AdsUtil.getCreateSuccessMessage(), AdsUtil.getCreateSuccessCode());
-
             return commonResult;
         } catch (Exception e) {
             throw new AdsException(AdsUtil.getServerErrorMessage(), AdsUtil.getServerErrorCode());

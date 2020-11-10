@@ -8,6 +8,7 @@ import com.example.jiw.service.AdsService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +31,12 @@ public class AdsController {
             @ApiResponse(code = 500, message ="서버에 문제가 발생하여 요청을 처리하지 못하였습니다.")
     })
     @GetMapping("/ads")
-    public ResponseEntity<?> getAds(
+    public ResponseEntity getAds(
                     @ApiParam(value = "집계날짜", required = true, example = "2020-11-09")@RequestParam("aggregateDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate aggregateDate,
                     @ApiParam(value = "집계시간", required = false, example = "1")@RequestParam(name = "aggregateTime", defaultValue = "0") int aggregateTime) throws AdsException {
         log.info("aggregateDate : {}, aggregateTime : {}", aggregateDate, aggregateTime);
         AdsInfoResult adsInfoResult = adsService.getAds(aggregateDate, aggregateTime);
-
-        return ResponseEntity.status(200).body(adsInfoResult);
+        return new ResponseEntity<>(adsInfoResult, HttpStatus.OK);
     }
 
     @ApiOperation(value = "광고 종합 정보 생성", notes = "입력한 시간에 정보가 존재하지 않으면 새로운 광고정보를 생성하며 광고정보가 존재한다면 값을 갱신합니다. ")
@@ -45,10 +45,9 @@ public class AdsController {
             @ApiResponse(code = 500, message ="서버에 문제가 발생하여 요청을 처리하지 못하였습니다.")
     })
     @PostMapping("/ads")
-    public ResponseEntity<?> createAds(@RequestBody Ads ads) throws AdsException {
+    public ResponseEntity createAds(@RequestBody Ads ads) throws AdsException {
         log.info("ads : {}", ads.toString());
         CommonResult commonResult = adsService.createAds(ads);
-
-        return ResponseEntity.status(201).body(commonResult);
+        return new ResponseEntity<>(commonResult, HttpStatus.CREATED);
     }
 }
